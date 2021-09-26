@@ -1,0 +1,35 @@
+<!--admin 에서 product 추가하는 부분 -->
+<%- include('../includes/head.ejs') %>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <link rel="stylesheet" href="/css/forms.css">
+    <main>
+        <% if(ErrorMessage.length> 0) {%>
+        <div class="user-message user-message--err"><%=ErrorMessage%></div>
+        <% } %>
+        <form class="product-form" action="/login" method="POST">
+            <div class="form-control">
+                <label for="email">email</label>
+                <input type="text"
+                class = "<%= validationError.find(e=> e.param === 'email') ? 'invalid' : ''%>" 
+                name="email" id="email" value="<%=oldInput.email%>">
+            </div>
+            <div class="form-control">
+                <label for="password">password</label>
+                <input type="password"
+                class = "<%= validationError.find(e=> e.param === 'password') ? 'invalid' : ''%>" 
+                 name="password" id="password" value="<%=oldInput.password%>"> 
+            </div>
+            <input  type="hidden"  name="_csrf"  value="<%= csrfToken%>"  >
+            <button class="btn" type="submit">continue</button>
+            <p >Are you new to Amadoo?</p>
+            <a href="/signUp" class="btn">sign up now</a>
+            <p >did you forget your password?</p>
+            <a href="/new-password" class="btn">forgot my password</a>
+        </form>
+
+    </main>
+
+<%- include('../includes/end.ejs') %>
